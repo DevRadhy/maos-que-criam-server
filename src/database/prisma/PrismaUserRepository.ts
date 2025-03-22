@@ -30,4 +30,14 @@ export class PrismaUserRepository implements UserRepository {
       where: { id },
     });
   }
+
+  async findByCPF(cpf: string): Promise<User> {
+    const user = await this.prisma.user.findFirst({ where: { cpf } });
+
+    if (!user) {
+      throw new AppError("Usuário não encontrado");
+    }
+
+    return new User(user, user.id);
+  }
 }
