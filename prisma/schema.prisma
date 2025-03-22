@@ -9,9 +9,9 @@ datasource db {
 
 model User {
   id        String @id @default(uuid())
+  cpf       String @unique
   email     String @unique
   name      String
-  cpf       String
   whatsapp  String
   instagram String
   facebook  String
