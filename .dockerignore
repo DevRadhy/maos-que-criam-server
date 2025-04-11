@@ -1,0 +1,15 @@
+# node_modules
+node_modules/
+
+# Linting
+eslint.config.mjs
+
+# Environment variables
+.env
+.env.example
+
+# Git & Github
+.git
+.gitignore
+
+README.md
