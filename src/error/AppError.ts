@@ -2,11 +2,13 @@ import { CustomError } from "./CustomError";
 
 export class AppError extends CustomError {
   readonly message: string;
-  readonly statusCode: number;
+  readonly status: number;
 
-  constructor(message: string, statusCode = 400) {
+  constructor(message: string, status = 400) {
     super(message);
     this.message = message;
-    this.statusCode = statusCode;
+    this.status = status;
+
+    Error.captureStackTrace(this, this.constructor);
   }
 }
