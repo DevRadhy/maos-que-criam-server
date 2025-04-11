@@ -20,7 +20,12 @@ export class PrismaUserRepository implements UserRepository {
     await this.prisma.user.create({
       data: {
         id: user.id,
-        ...user.props,
+        email: user.email,
+        name: user.name,
+        cpf: user.cpf,
+        whatsapp: user.whatsapp,
+        instagram: user.instagram,
+        facebook: user.facebook,
       },
     });
   }
@@ -31,11 +36,11 @@ export class PrismaUserRepository implements UserRepository {
     });
   }
 
-  async findByCPF(cpf: string): Promise<User> {
+  async findByCPF(cpf: string): Promise<User | null> {
     const user = await this.prisma.user.findFirst({ where: { cpf } });
 
     if (!user) {
-      throw new AppError("Usuário não encontrado");
+      return null;
     }
 
     return new User(user, user.id);

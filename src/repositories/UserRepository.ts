@@ -8,5 +8,5 @@ export abstract class UserRepository {
   abstract findById(id: string): Promise<User>;
   abstract create(user: User): Promise<void>;
   abstract delete(id: string): Promise<void>;
-  abstract findByCPF(cpf: string): Promise<User>;
+  abstract findByCPF(cpf: string): Promise<User | null>;
 }

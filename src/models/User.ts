@@ -10,12 +10,17 @@ type UserProps = {
 }
 
 class User {
-  public id: string;
-  public props: UserProps;
+  public readonly id: string;
+  public email: string;
+  public name: string;
+  public cpf: string;
+  public whatsapp: string;
+  public instagram: string;
+  public facebook: string;
 
   constructor(props: UserProps, id?: string) {
-    this.id = id ? id : randomUUID()
-    this.props = props
+    Object.assign(this, props)
+    this.id = id ?? randomUUID()
   }
 }
 
