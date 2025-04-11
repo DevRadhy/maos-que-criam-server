@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { CreateUserService } from "../../../services/user/CreateUserService";
+import { AppError } from "../../../error/AppError";
 
 export class CreateUserController {
   constructor(private createUserService: CreateUserService) {}
@@ -17,10 +18,19 @@ export class CreateUserController {
         facebook,
       });
 
-      return response.status(201).json(user);
+      response.status(201).json(user);
     } catch (error) {
-      console.error(error);
-      return response.status(400).json({ message: "Erro inesperado" });
+      if (error instanceof AppError) {
+        response.status(error.status).json({
+          status: error.status,
+          message: error.message,
+        });
+      } else {
+        response.status(500).json({
+          status: "error",
+          message: "Internal Server Error",
+        });
+      }
     }
   }
 }
