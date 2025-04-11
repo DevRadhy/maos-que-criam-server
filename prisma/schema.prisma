@@ -15,4 +15,6 @@ model User {
   whatsapp  String
   instagram String
   facebook  String
+
+  @@map("users")
 }
