@@ -55,4 +55,14 @@ export class PrismaUserRepository implements UserRepository {
 
     return new User(user, user.id);
   }
+
+  async find(): Promise<User[] | null> {
+    const users = await this.prisma.user.findMany();
+
+    if (!users) {
+      return null;
+    }
+
+    return users.map((user) => new User(user, user.id));
+  }
 }

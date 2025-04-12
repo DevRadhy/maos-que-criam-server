@@ -10,4 +10,5 @@ export abstract class UserRepository {
   abstract delete(id: string): Promise<void>;
   abstract findByCPF(cpf: string): Promise<User | null>;
   abstract findByEmail(email: string): Promise<User | null>;
+  abstract find(): Promise<User[] | null>;
 }
