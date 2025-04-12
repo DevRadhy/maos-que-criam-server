@@ -15,10 +15,15 @@ export class CreateUserService {
   constructor(private userRepository: UserRepository) {}
 
   async execute(props: UserProps) {
-    const userAlreadyExistis = await this.userRepository.findByCPF(props.cpf);
+    const cpfAlreadyExistis = await this.userRepository.findByCPF(props.cpf);
+    const emailAlreadyExistis = await this.userRepository.findByEmail(props.email);
 
-    if (userAlreadyExistis) {
-      throw new AppError("Usuário já existe");
+    if (cpfAlreadyExistis) {
+      throw new AppError("Já existe um usuário cadastrado com esse CPF");
+    }
+
+    if (emailAlreadyExistis) {
+      throw new AppError("Já existe um usuário cadastrado com esse e-mail");
     }
 
     const user = new User(props);
