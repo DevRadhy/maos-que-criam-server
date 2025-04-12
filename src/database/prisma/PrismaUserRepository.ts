@@ -30,6 +30,20 @@ export class PrismaUserRepository implements UserRepository {
     });
   }
 
+  async update(user: User): Promise<void> {
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: {
+        email: user.email,
+        name: user.name,
+        cpf: user.cpf,
+        whatsapp: user.whatsapp,
+        instagram: user.instagram,
+        facebook: user.facebook,
+      },
+    });
+  }
+
   async delete(id: string): Promise<void> {
     await this.prisma.user.delete({
       where: { id },
